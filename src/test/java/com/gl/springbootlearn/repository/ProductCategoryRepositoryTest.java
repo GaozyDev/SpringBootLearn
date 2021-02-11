@@ -23,8 +23,8 @@ public class ProductCategoryRepositoryTest extends TestCase {
 
     @Test
     public void findOneTest() {
-        ProductCategory productCategory = repository.findById(1).orElse(null);
-        System.out.println(productCategory);
+        ProductCategory productCategory = repository.findById(2).orElse(null);
+        Assert.assertNotNull(productCategory);
     }
 
     @Test
