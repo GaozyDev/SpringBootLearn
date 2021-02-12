@@ -3,8 +3,10 @@ package com.gl.springbootlearn.repository;
 import com.gl.springbootlearn.dataobject.OrderDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, String> {
 
-    OrderDetail findByOrderId(String orderId);
+    List<OrderDetail> findByOrderId(String orderId);
 }
