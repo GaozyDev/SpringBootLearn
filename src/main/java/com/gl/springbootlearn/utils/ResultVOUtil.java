@@ -2,7 +2,7 @@ package com.gl.springbootlearn.utils;
 
 import com.gl.springbootlearn.VO.ResultVO;
 
-public class ResultV0Util {
+public class ResultVOUtil {
 
     public static <T> ResultVO<T> success(T data) {
         ResultVO<T> resultV0 = new ResultVO<>();

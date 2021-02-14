@@ -2,7 +2,7 @@ package com.gl.springbootlearn.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.gl.springbootlearn.dataobject.OrderDetail;
-import com.gl.springbootlearn.serializer.Date2LongSerializer;
+import com.gl.springbootlearn.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 
 import java.math.BigDecimal;

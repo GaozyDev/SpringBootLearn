@@ -8,7 +8,7 @@ import com.gl.springbootlearn.exception.SellException;
 import com.gl.springbootlearn.form.OrderForm;
 import com.gl.springbootlearn.service.BuyerService;
 import com.gl.springbootlearn.service.OrderService;
-import com.gl.springbootlearn.utils.ResultV0Util;
+import com.gl.springbootlearn.utils.ResultVOUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -54,7 +54,7 @@ public class BuyerOrderController {
         Map<String, String> map = new HashMap<>();
         map.put("orderId", createResult.getOrderId());
 
-        return ResultV0Util.success(map);
+        return ResultVOUtil.success(map);
     }
 
     @GetMapping("/list")
@@ -69,20 +69,20 @@ public class BuyerOrderController {
         PageRequest request = new PageRequest(page, size);
         Page<OrderDTO> orderDTOPage = orderService.findList(openid, request);
 
-        return ResultV0Util.success(orderDTOPage.getContent());
+        return ResultVOUtil.success(orderDTOPage.getContent());
     }
 
     @GetMapping("/detail")
     public ResultVO<OrderDTO> detail(@RequestParam("openid") String openid,
                                      @RequestParam("orderId") String orderId) {
         OrderDTO orderDTO = buyerService.findOrderOne(openid, orderId);
-        return ResultV0Util.success(orderDTO);
+        return ResultVOUtil.success(orderDTO);
     }
 
     @PostMapping("/cancel")
     public ResultVO<Object> cancel(@RequestParam("openid") String openid,
                                    @RequestParam("orderId") String orderId) {
         buyerService.cancelOrder(openid, orderId);
-        return ResultV0Util.success();
+        return ResultVOUtil.success();
     }
 }

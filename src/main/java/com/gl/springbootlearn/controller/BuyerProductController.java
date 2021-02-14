@@ -7,7 +7,7 @@ import com.gl.springbootlearn.dataobject.ProductCategory;
 import com.gl.springbootlearn.dataobject.ProductInfo;
 import com.gl.springbootlearn.service.CategoryService;
 import com.gl.springbootlearn.service.ProductService;
-import com.gl.springbootlearn.utils.ResultV0Util;
+import com.gl.springbootlearn.utils.ResultVOUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -54,6 +54,6 @@ public class BuyerProductController {
             productVO.setProductInfoVOList(productInfoVOList);
             productVOList.add(productVO);
         }
-        return ResultV0Util.success(productVOList);
+        return ResultVOUtil.success(productVOList);
     }
 }
