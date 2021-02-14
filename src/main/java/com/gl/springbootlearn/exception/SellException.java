@@ -4,8 +4,15 @@ import com.gl.springbootlearn.enums.ResultEnum;
 
 public class SellException extends RuntimeException {
 
+    private final Integer code;
+
     public SellException(ResultEnum resultEnum) {
         super(resultEnum.getMessage());
-        Integer code = resultEnum.getCode();
+        this.code = resultEnum.getCode();
+    }
+
+    public SellException(Integer code, String message) {
+        super(message);
+        this.code = code;
     }
 }
