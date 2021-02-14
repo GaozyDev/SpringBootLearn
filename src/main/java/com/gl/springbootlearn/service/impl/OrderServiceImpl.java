@@ -25,7 +25,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import javax.xml.transform.Result;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
@@ -67,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
         }
 
         OrderMaster orderMaster = new OrderMaster();
-        orderMaster.setOrderId(orderId);
+        orderDTO.setOrderId(orderId);
         BeanUtils.copyProperties(orderDTO, orderMaster);
         orderMaster.setOrderAmount(orderAmount);
         orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
