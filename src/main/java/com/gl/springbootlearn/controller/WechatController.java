@@ -40,16 +40,13 @@ public class WechatController {
     @GetMapping("/userInfo")
     public String userInfo(@RequestParam("code") String code,
                            @RequestParam("state") String returnUrl) {
-        WxMpOAuth2AccessToken wxMpOAuth2AccessToken = new WxMpOAuth2AccessToken();
         try {
-            wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
+            WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
+            String openId = wxMpOAuth2AccessToken.getOpenId();
+            return String.format("redirect:%s?openid=%s", returnUrl, openId);
         } catch (WxErrorException e) {
             log.error("[微信网页授权]" + e);
             throw new SellException(ResultEnum.WECHAT_MP_ERROR.getCode(), e.getError().getErrorMsg());
         }
-
-        String openId = wxMpOAuth2AccessToken.getOpenId();
-
-        return String.format("redirect:%s?openid=%s", returnUrl, openId);
     }
 }
