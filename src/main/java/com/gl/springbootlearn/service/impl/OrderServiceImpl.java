@@ -13,6 +13,7 @@ import com.gl.springbootlearn.exception.SellException;
 import com.gl.springbootlearn.repository.OrderDetailRepository;
 import com.gl.springbootlearn.repository.OrderMasterRepository;
 import com.gl.springbootlearn.service.OrderService;
+import com.gl.springbootlearn.service.PayService;
 import com.gl.springbootlearn.service.ProductService;
 import com.gl.springbootlearn.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +43,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private OrderMasterRepository orderMasterRepository;
+
+    @Autowired
+    private PayService payService;
 
     @Override
     @Transactional
@@ -135,7 +139,7 @@ public class OrderServiceImpl implements OrderService {
         productService.increaseStock(cartDTOList);
 
         if (orderDTO.getPayStatus().equals(PayStatusEnum.SUCCESS.getCode())) {
-            // todo 退款
+            payService.refund(orderDTO);
         }
 
         return orderDTO;
