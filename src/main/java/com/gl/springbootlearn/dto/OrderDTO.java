@@ -1,7 +1,11 @@
 package com.gl.springbootlearn.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.gl.springbootlearn.dataobject.OrderDetail;
+import com.gl.springbootlearn.enums.OrderStatusEnum;
+import com.gl.springbootlearn.enums.PayStatusEnum;
+import com.gl.springbootlearn.utils.EnumUtil;
 import com.gl.springbootlearn.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 
@@ -35,4 +39,14 @@ public class OrderDTO {
     private Date updateTime;
 
     List<OrderDetail> orderDetailList;
+
+    @JsonIgnore
+    public OrderStatusEnum getOrderStatusEnum() {
+        return EnumUtil.getByCode(orderStatus, OrderStatusEnum.class);
+    }
+
+    @JsonIgnore
+    public PayStatusEnum getPayStatusEnum() {
+        return EnumUtil.getByCode(payStatus, PayStatusEnum.class);
+    }
 }

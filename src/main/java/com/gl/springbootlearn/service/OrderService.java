@@ -17,4 +17,6 @@ public interface OrderService {
     OrderDTO finish(OrderDTO orderDTO);
 
     OrderDTO paid(OrderDTO orderDTO);
+
+    Page<OrderDTO> findList(Pageable pageable);
 }
