@@ -11,10 +11,18 @@ spring:
 server:
   servlet:
     context-path: /sell
+
 wechat:
-  mpAppId: ""
-  mpAppSecret: ""
+  mpAppId: wx0cfc8d74e00174ee
+  mpAppSecret: 87174b25d1d6925ab7c9b5a473a32efb
+  openAppid: ""
+  openAppSecret: ""
   mchId: ""
   mchKey: ""
   keyPath: /weixin_cert/h5.p12
   notifyUrl: http://sell.natapp4.cc/sell/pay/notify
+
+project-url:
+  wechatMpAuthorize: http://quick.nat300.top
+  wechatOpenAuthorize: ""
+  sell: ""

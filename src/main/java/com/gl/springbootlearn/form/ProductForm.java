@@ -9,6 +9,8 @@ public class ProductForm {
 
     private String productId;
 
+    private String productName;
+
     private BigDecimal productPrice;
 
     private Integer productStock;

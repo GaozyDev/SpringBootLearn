@@ -13,6 +13,10 @@ public class WechatAccountConfig {
 
     private String mpAppSecret;
 
+    private String openAppId;
+
+    private String openAppSecret;
+
     private String mchId;
 
     private String mchKey;
