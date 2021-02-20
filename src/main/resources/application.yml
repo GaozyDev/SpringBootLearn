@@ -13,8 +13,8 @@ server:
     context-path: /sell
 
 wechat:
-  mpAppId: wx0cfc8d74e00174ee
-  mpAppSecret: 87174b25d1d6925ab7c9b5a473a32efb
+  mpAppId: ""
+  mpAppSecret: ""
   openAppid: ""
   openAppSecret: ""
   mchId: ""
