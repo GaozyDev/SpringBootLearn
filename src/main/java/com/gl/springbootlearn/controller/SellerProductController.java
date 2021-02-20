@@ -1,6 +1,7 @@
 package com.gl.springbootlearn.controller;
 
 import com.gl.springbootlearn.dataobject.ProductInfo;
+import com.gl.springbootlearn.exception.SellException;
 import com.gl.springbootlearn.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,5 +31,35 @@ public class SellerProductController {
         map.put("currentPage", page);
         map.put("size", size);
         return new ModelAndView("product/list", map);
+    }
+
+    @RequestMapping("/on_sale")
+    public ModelAndView onSale(@RequestParam("productId") String productId,
+                               Map<String, Object> map) {
+        try {
+            productService.onSale(productId);
+        } catch (SellException e) {
+            map.put("msg", e.getMessage());
+            map.put("url", "/sell/seller/product/list");
+            return new ModelAndView("common/error", map);
+        }
+
+        map.put("url", "/sell/seller/product/list");
+        return new ModelAndView("common/success", map);
+    }
+
+    @RequestMapping("/off_sale")
+    public ModelAndView offSale(@RequestParam("productId") String productId,
+                                Map<String, Object> map) {
+        try {
+            productService.offSale(productId);
+        } catch (SellException e) {
+            map.put("msg", e.getMessage());
+            map.put("url", "/sell/seller/product/list");
+            return new ModelAndView("common/error", map);
+        }
+
+        map.put("url", "sell/seller/product/list");
+        return new ModelAndView("common/success", map);
     }
 }
