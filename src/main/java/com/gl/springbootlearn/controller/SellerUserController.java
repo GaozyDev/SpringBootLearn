@@ -23,7 +23,7 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Controller
-@RequestMapping
+@RequestMapping("/seller")
 public class SellerUserController {
 
     @Autowired
