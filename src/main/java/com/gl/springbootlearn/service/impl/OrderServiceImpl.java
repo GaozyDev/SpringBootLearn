@@ -15,6 +15,7 @@ import com.gl.springbootlearn.repository.OrderMasterRepository;
 import com.gl.springbootlearn.service.OrderService;
 import com.gl.springbootlearn.service.PayService;
 import com.gl.springbootlearn.service.ProductService;
+import com.gl.springbootlearn.service.PushMessageService;
 import com.gl.springbootlearn.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -46,6 +47,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private PayService payService;
+
+    @Autowired
+    private PushMessageService pushMessageService;
 
     @Override
     @Transactional
@@ -161,6 +165,8 @@ public class OrderServiceImpl implements OrderService {
             log.error("[完结订单]更新失败, orderMaster={}", orderMaster);
             throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
         }
+
+        pushMessageService.orderStatus(orderDTO);
 
         return orderDTO;
     }
