@@ -1,6 +1,5 @@
 package com.gl.springbootlearn.config;
 
-import com.gl.springbootlearn.config.WechatAccountConfig;
 import me.chanjar.weixin.mp.api.WxMpConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
