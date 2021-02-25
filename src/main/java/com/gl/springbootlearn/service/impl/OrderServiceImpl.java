@@ -12,10 +12,7 @@ import com.gl.springbootlearn.enums.ResultEnum;
 import com.gl.springbootlearn.exception.SellException;
 import com.gl.springbootlearn.repository.OrderDetailRepository;
 import com.gl.springbootlearn.repository.OrderMasterRepository;
-import com.gl.springbootlearn.service.OrderService;
-import com.gl.springbootlearn.service.PayService;
-import com.gl.springbootlearn.service.ProductService;
-import com.gl.springbootlearn.service.PushMessageService;
+import com.gl.springbootlearn.service.*;
 import com.gl.springbootlearn.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -51,6 +48,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private PushMessageService pushMessageService;
 
+    @Autowired
+    private WebSocket webSocket;
+
     @Override
     @Transactional
     public OrderDTO create(OrderDTO orderDTO) {
@@ -84,6 +84,8 @@ public class OrderServiceImpl implements OrderService {
         List<CartDTO> cartDTOList = orderDTO.getOrderDetailList().stream().map(v ->
                 new CartDTO(v.getProductId(), v.getProductQuantity())).collect(Collectors.toList());
         productService.decreaseStock(cartDTOList);
+
+        webSocket.sendMessage(orderDTO.getOrderId());
 
         return orderDTO;
     }
