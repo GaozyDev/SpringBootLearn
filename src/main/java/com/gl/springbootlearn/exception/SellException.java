@@ -1,7 +1,9 @@
 package com.gl.springbootlearn.exception;
 
 import com.gl.springbootlearn.enums.ResultEnum;
+import lombok.Getter;
 
+@Getter
 public class SellException extends RuntimeException {
 
     private final Integer code;

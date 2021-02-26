@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 @Controller
@@ -40,8 +41,14 @@ public class WechatController {
     @GetMapping("/authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl) {
         String url = projectUrlConfig.getWechatMpAuthorize() + "/sell/wechat/userInfo";
-        String redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAUTH2_SCOPE_BASE, URLEncoder.encode(returnUrl));
-        return String.format("redirect:%s", redirectUrl);
+        String redirectUrl = null;
+        try {
+            redirectUrl = wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAUTH2_SCOPE_BASE, URLEncoder.encode(returnUrl, "UTF-8"));
+            return String.format("redirect:%s", redirectUrl);
+        } catch (UnsupportedEncodingException e) {
+            log.error("[微信网页授权]" + e);
+            throw new SellException(ResultEnum.WECHAT_MP_ERROR.getCode(), e.getMessage());
+        }
     }
 
     @GetMapping("/userInfo")
@@ -60,8 +67,14 @@ public class WechatController {
     @GetMapping("/qrAuthorize")
     public String qrAuthorize(@RequestParam("returnUrl") String returnUrl) {
         String url = projectUrlConfig.getWechatOpenAuthorize() + "/sell/wechat/qrUserInfo";
-        String redirectUrl = wxOpenService.buildQrConnectUrl(url, WxConsts.QRCONNECT_SCOPE_SNSAPI_LOGIN, URLEncoder.encode(returnUrl));
-        return "redirect:" + redirectUrl;
+        String redirectUrl = null;
+        try {
+            redirectUrl = wxOpenService.buildQrConnectUrl(url, WxConsts.QRCONNECT_SCOPE_SNSAPI_LOGIN, URLEncoder.encode(returnUrl, "UTF-8"));
+            return "redirect:" + redirectUrl;
+        } catch (UnsupportedEncodingException e) {
+            log.error("[微信网页授权]" + e);
+            throw new SellException(ResultEnum.WECHAT_MP_ERROR.getCode(), e.getMessage());
+        }
     }
 
     @GetMapping("/qrUserInfo")
